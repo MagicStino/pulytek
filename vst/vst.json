@@ -1,0 +1,34 @@
+{
+  "name": "PulyTek",
+  "vendor": "MagicStino",
+  "uid": "EqF1",
+  "version": 100,
+  "so": "pulytek.so",
+  "params": "params.json",
+  "layout": "layout.conf",
+  "effect": true,
+  "cc": false,
+  "nrpn": false,
+  "targets": [
+    "armv7"
+  ],
+  "build": {
+    "root": "..",
+    "sources": [
+      "src/engine.cpp",
+      "src/upstream/EQP1A.cpp"
+    ],
+    "cflags": [
+      "-std=c++17",
+      "-Isrc"
+    ],
+    "libs": [
+      "-lm"
+    ]
+  },
+  "art": "html",
+  "defines": {
+    "HAS_DISPLAY_REV": 1
+  },
+  "skin_post": "../tools/skin_post.py"
+}

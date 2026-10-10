@@ -1,0 +1,19 @@
+:root { --sheen: .17; --shadow: drop-shadow(2px 3px 3px #061320a0); }
+.text { font-family: Georgia, serif; }
+.look-base { fill: #111315; stroke: #a6aba4; stroke-width: 2; }
+.look-head { fill: #151717; stroke: #030405; stroke-width: .025; }
+.look-line { stroke: #fff9dd; }
+.look-cap { fill: url(#metal-radial); }
+.look-body { fill: #151718; }
+.knob-arc { stroke: transparent; }
+.knob-track { stroke: #edf0df; opacity: .75; }
+.on .look-led { fill: #ffae27; filter: drop-shadow(0 0 8px #ffc251); }
+.look-led { fill: #522e0b; }
+.look-led-bezel { fill: #a3a397; stroke: #091b2b; stroke-width: 2; }
+.frame-title, .knob-label, .box-label { fill: #f8f5e7; }
+.seg { stroke: #9cb2bd; stroke-width: .7; }
+
+.frame-title, .seg-tx { font-family: "DejaVu Serif", Georgia, serif; font-weight: 500; letter-spacing: .07em; }
+.frame-border { stroke: #a4bec9; stroke-opacity: .55; stroke-width: 1; }
+.frame-rule { stroke-opacity: .35; }
+.seg-bg { rx: 7; }

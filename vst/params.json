@@ -1,0 +1,284 @@
+{
+  "name": "PulyTek",
+  "params": [
+    {
+      "key": "lo_freq",
+      "name": "Low frequency (Hz)",
+      "options": [
+        "20",
+        "30",
+        "60",
+        "100"
+      ],
+      "default": 0
+    },
+    {
+      "key": "hi_freq",
+      "name": "High boost frequency (kHz)",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "8",
+        "10",
+        "12",
+        "16"
+      ],
+      "default": 3
+    },
+    {
+      "key": "cut_freq",
+      "name": "High cut frequency (kHz)",
+      "options": [
+        "5",
+        "10",
+        "20"
+      ],
+      "default": 2
+    },
+    {
+      "key": "lo_boost",
+      "name": "Low boost",
+      "min": 0,
+      "max": 10,
+      "default": 0
+    },
+    {
+      "key": "lo_cut",
+      "name": "Low atten",
+      "min": 0,
+      "max": 10,
+      "default": 0
+    },
+    {
+      "key": "hi_boost",
+      "name": "High boost",
+      "min": 0,
+      "max": 10,
+      "default": 0
+    },
+    {
+      "key": "bandwidth",
+      "name": "Bandwidth",
+      "min": 0,
+      "max": 10,
+      "default": 5
+    },
+    {
+      "key": "hi_cut",
+      "name": "High atten",
+      "min": 0,
+      "max": 10,
+      "default": 0
+    },
+    {
+      "key": "output",
+      "name": "Output",
+      "min": -20,
+      "max": 20,
+      "default": 0,
+      "unit": "dB"
+    },
+    {
+      "key": "bypass",
+      "name": "Bypass",
+      "options": [
+        "Off",
+        "On"
+      ],
+      "default": 0
+    },
+    {
+      "key": "tube",
+      "name": "Tube vintage",
+      "options": [
+        "Off",
+        "On"
+      ],
+      "default": 0
+    },
+    {
+      "key": "tube_mix",
+      "name": "Warmth mix",
+      "min": 0,
+      "max": 100,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "key": "side_on",
+      "name": "Side mixing",
+      "options": [
+        "Off",
+        "On"
+      ],
+      "default": 0
+    },
+    {
+      "key": "width",
+      "name": "Stereo width",
+      "min": 0,
+      "max": 200,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "key": "side_gain",
+      "name": "Side level",
+      "min": -24,
+      "max": 12,
+      "default": 0,
+      "unit": "dB"
+    },
+    {
+      "key": "s1_freq",
+      "name": "Side 1 Frequency",
+      "min": 20,
+      "max": 20000,
+      "default": 150,
+      "unit": "Hz"
+    },
+    {
+      "key": "s1_gain",
+      "name": "Side 1 Gain",
+      "min": -12,
+      "max": 12,
+      "default": 0,
+      "unit": "dB"
+    },
+    {
+      "key": "s1_q",
+      "name": "Side 1 Q",
+      "min": 0.2,
+      "max": 10,
+      "default": 0.707,
+      "unit": ""
+    },
+    {
+      "key": "s2_freq",
+      "name": "Side 2 Frequency",
+      "min": 20,
+      "max": 20000,
+      "default": 800,
+      "unit": "Hz"
+    },
+    {
+      "key": "s2_gain",
+      "name": "Side 2 Gain",
+      "min": -12,
+      "max": 12,
+      "default": 0,
+      "unit": "dB"
+    },
+    {
+      "key": "s2_q",
+      "name": "Side 2 Q",
+      "min": 0.2,
+      "max": 10,
+      "default": 0.707,
+      "unit": ""
+    },
+    {
+      "key": "s3_freq",
+      "name": "Side 3 Frequency",
+      "min": 20,
+      "max": 20000,
+      "default": 3000,
+      "unit": "Hz"
+    },
+    {
+      "key": "s3_gain",
+      "name": "Side 3 Gain",
+      "min": -12,
+      "max": 12,
+      "default": 0,
+      "unit": "dB"
+    },
+    {
+      "key": "s3_q",
+      "name": "Side 3 Q",
+      "min": 0.2,
+      "max": 10,
+      "default": 0.707,
+      "unit": ""
+    },
+    {
+      "key": "s4_freq",
+      "name": "Side 4 Frequency",
+      "min": 20,
+      "max": 20000,
+      "default": 10000,
+      "unit": "Hz"
+    },
+    {
+      "key": "s4_gain",
+      "name": "Side 4 Gain",
+      "min": -12,
+      "max": 12,
+      "default": 0,
+      "unit": "dB"
+    },
+    {
+      "key": "s4_q",
+      "name": "Side 4 Q",
+      "min": 0.2,
+      "max": 10,
+      "default": 0.707,
+      "unit": ""
+    },
+    {
+      "key": "air",
+      "name": "Air",
+      "options": [
+        "Off",
+        "On"
+      ],
+      "default": 0
+    },
+    {
+      "key": "air_freq",
+      "name": "Air frequency (kHz)",
+      "options": [
+        "5",
+        "8",
+        "10",
+        "12",
+        "16",
+        "20"
+      ],
+      "default": 3
+    },
+    {
+      "key": "tube_drive",
+      "name": "Tube drive",
+      "min": 0,
+      "max": 100,
+      "default": 25,
+      "unit": "%"
+    },
+    {
+      "key": "tube_warmth",
+      "name": "Tube warmth",
+      "min": 0,
+      "max": 100,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "key": "meter_l",
+      "name": "Left VU",
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "no_poll": true
+    },
+    {
+      "key": "meter_r",
+      "name": "Right VU",
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "no_poll": true
+    }
+  ]
+}
