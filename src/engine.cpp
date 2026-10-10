@@ -13,14 +13,22 @@ static void midi(void*,const uint8_t*,int){}
 static void set(void* p,const char* key,const char* value){
     auto& s=*static_cast<PulyTekCore*>(p);
     if(!std::strcmp(key,"state")){
-        bool legacy=!std::strncmp(value,"PulyTek1 ",9);
-        if(!legacy&&std::strncmp(value,"PulyTek2 ",9))return;
-        auto vals=s.values;vals[31]=50;vals[32]=100;const char* at=value+9;
-        for(int i=0;i<s.count;++i){
-            if(legacy&&i==31&&!*at)break;
+        int version=!std::strncmp(value,"PulyTek1 ",9)?1:!std::strncmp(value,"PulyTek2 ",9)?2:!std::strncmp(value,"PulyTek3 ",9)?3:0;
+        if(!version)return;
+        std::array<float,33> vals{};vals[31]=50;const char* at=value+9;
+        const int n=version==1?31:version==2?33:32;
+        for(int i=0;i<n;++i){
             char* end=nullptr;errno=0;vals[i]=std::strtof(at,&end);if(end==at||errno==ERANGE||!std::isfinite(vals[i]))return;at=end;
         }
         if(*at!=0)return;
+        if(version==2){
+            // Preserve legacy AIR's asymptotic high-frequency gain; the transition curve is approximate.
+            double db=std::clamp(double(vals[31]),0.0,100.0)*.06;
+            double mix=std::clamp(double(vals[32]),0.0,100.0)*.01;
+            vals[31]=float(20*std::log10(1+mix*(std::pow(10,db/20)-1))/.06);
+        }
+        // Apply Amount before the switch so below-threshold AIR cannot be restored as enabled.
+        s.set(31,vals[31]);
         for(int i=0;i<s.count;++i)s.set(i,vals[i]);return;
     }
     for(int i=0;i<s.count;++i)if(!std::strcmp(key,s.keys[i])){
@@ -31,7 +39,7 @@ static void set(void* p,const char* key,const char* value){
 static int get(void* p,const char* key,char* b,int len){
     auto& s=*static_cast<PulyTekCore*>(p);
     if(!std::strcmp(key,"state")){
-        int at=std::snprintf(b,len,"PulyTek2");
+        int at=std::snprintf(b,len,"PulyTek3");
         for(auto v:s.values){if(at<0||at>=len)return 0;at+=std::snprintf(b+at,len-at," %.9g",v);}return at<len?at:0;
     }
     if(!std::strcmp(key,"display_rev"))return std::snprintf(b,len,"%u",s.revision);
