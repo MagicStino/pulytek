@@ -2,7 +2,7 @@ PulyTek is a separate open-source Pultec-style EQ port for the native Akai Force
 
 - Blue vintage panel, Bakelite-style knobs, ribbed selector buttons, warm lamps and stereo VU meters.
 - Upstream EQP-WDF-1A passive WDF circuit by Alberto Barrera / ABSounds, GPLv3.
-- Extra tube-colour switch with DRIVE, WARMTH and continuous wet/dry MIX, six-frequency AIR shelf with continuous DRIVE and MIX, output trim and full bypass.
+- Extra tube-colour switch with DRIVE, WARMTH and continuous wet/dry MIX, six-frequency AIR shelf with one continuous AMOUNT control, output trim and full bypass.
 - Side Mixing on/off, 0–200% stereo width, side level and four side-only parametric bands.
 - Native ARMv7 hard-float VST2 effect, Akai TUI skin, Q-Link mappings, portable installer and complete corresponding source.
 
@@ -13,3 +13,7 @@ system libraries; that is not a physical-device compatibility guarantee. Read RE
 The portable ZIP is for Force/MPC; the optional desktop Linux VST3 is a separate CI artifact and is not installed on Force.
 
 0.1.0-rc2 adds a combined Tube & AIR page with Drive and Mix controls. Legacy rc1 tube/EQ state chunks load with the original +3 dB, fully wet AIR defaults.
+
+0.1.0-rc3 removes the redundant AIR Mix knob, renames AIR Drive to Amount and turns AIR off below 2%. Tube controls are unchanged. Legacy native state migrates; rc2 partial AIR mixes preserve high-frequency gain approximately through the shelf transition.
+
+49 original factory programs: Init and six each for Voice, Drums, Bass, Guitar, Keys, Bus, Master and Stereo. Native PRESET menu and desktop VST3 program support; complete control recall, including AIR amount before enable. Includes Drums Smash Bassdrum and Master Light / Hard Colour / Air / Smile / Warm / Wide Polish.

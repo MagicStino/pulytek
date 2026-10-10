@@ -11,7 +11,7 @@ Checked locally on 10 October 2026:
 - ASan/UBSan native host tests: parameters, selectors/data-wheel/Q-Links, independent instances, NULL input,
   accumulated processing, state and concurrent screen/audio access.
 - ARM ELF32 EABI hard-float, Cortex-A17, exported VSTPluginMain, maximum glibc 2.29; C++ runtime linked statically.
-- ARM QEMU smoke test against the owner's existing extracted Force 3.9.1 system libraries: dlopen, 35 parameters,
+- ARM QEMU smoke test against the owner's existing extracted Force 3.9.1 system libraries: dlopen, 34 parameters,
   48 kHz, 257-frame floating-point audio, exact bypass, combined processing, state, reset and destruction.
 - Native skin bounds, bindings, three pages and Q-Link assets; offline visual inspection. Actual touch operation
   and live meter update on hardware are not established by these tests.
@@ -35,3 +35,7 @@ boundaries; abrupt filter changes can click. Keep headroom when boosting; the fl
 
 The optional Linux VST3 is a separate build target. Its CI build result should be checked before distributing it;
 its editor is the host-style JUCE generic editor, and it has not been loaded on Force.
+
+rc3: AIR Amount below 2% turns AIR off and prevents enabling it; exact bypass tested at 0%, 1% and 1.999%. Exactly 2% remains usable, and 100% produces the expected +6 dB shelf. Native rc1/rc2 chunks migrate to the new Amount control. Legacy rc2 partial mixes preserve asymptotic shelf gain, with an approximate transition curve.
+
+Factory bank validation renders every preset at 44.1/48/96 kHz after conflicting settings, verifies all 32 recalled values, finite non-silent stereo output and peak below 1 for the specified low-level multitone. This is a deterministic headroom check, not an audition or a guarantee for arbitrary source levels.

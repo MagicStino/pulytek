@@ -1,10 +1,10 @@
-# Install PulyTek 0.1.0-rc2
+# Install PulyTek 0.1.0-rc3
 
 Experimental release candidate for Akai Force / MPC Gen1 running OpenPlugin-compatible firmware.
 The plugin has passed desktop DSP/host tests and ARM emulated loading against Force 3.9.1 libraries.
 **This release has not been tested on physical Force or MPC hardware.**
 
-1. Download `PulyTek-0.1.0-rc2-mpc-armv7.zip` and its SHA256 file from this project's GitHub release.
+1. Download `PulyTek-0.1.0-rc3-mpc-armv7.zip` and its SHA256 file from this project's GitHub release.
 2. Verify the ZIP checksum, unpack the whole folder and copy it to your device.
 3. Save your project. The installer stops/restarts the MPC application and backs up its settings.
 4. In a device root shell, run `sh install.sh` inside the unpacked folder. Use `-y` only to skip its confirmation.
