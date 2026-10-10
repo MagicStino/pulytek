@@ -32,3 +32,6 @@ Generated native interface previews, not device captures.
 ![Tube and AIR](https://raw.githubusercontent.com/MagicStino/pulytek/v1.0.0/docs/preview_1.png)
 
 ![Side Mixing](https://raw.githubusercontent.com/MagicStino/pulytek/v1.0.0/docs/preview_2.png)
+
+## 1.0.1 — stable preset popup during playback
+VU values now notify the host without requesting a full display rebuild. This prevents the PRESET menu from repeatedly rebuilding while needles move. Preset selection still requests a redraw and recalls all controls. Audio processing, state keys and factory programs are unchanged. A dedicated host regression test verifies ongoing meter notifications, zero meter-driven display rebuilds and normal preset selection redraw. Physical popup confirmation remains pending.
