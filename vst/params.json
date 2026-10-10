@@ -266,18 +266,10 @@
     },
     {
       "key": "air_drive",
-      "name": "Air drive",
+      "name": "Air amount",
       "min": 0,
       "max": 100,
       "default": 50,
-      "unit": "%"
-    },
-    {
-      "key": "air_mix",
-      "name": "Air mix",
-      "min": 0,
-      "max": 100,
-      "default": 100,
       "unit": "%"
     },
     {

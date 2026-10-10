@@ -30,5 +30,6 @@
   "defines": {
     "HAS_DISPLAY_REV": 1
   },
-  "skin_post": "../tools/skin_post.py"
+  "skin_post": "../tools/skin_post.py",
+  "presets": "presets.json"
 }
