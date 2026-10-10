@@ -17,3 +17,7 @@ The portable ZIP is for Force/MPC; the optional desktop Linux VST3 is a separate
 0.1.0-rc3 removes the redundant AIR Mix knob, renames AIR Drive to Amount and turns AIR off below 2%. Tube controls are unchanged. Legacy native state migrates; rc2 partial AIR mixes preserve high-frequency gain approximately through the shelf transition.
 
 49 original factory programs: Init and six each for Voice, Drums, Bass, Guitar, Keys, Bus, Master and Stereo. Native PRESET menu and desktop VST3 program support; complete control recall, including AIR amount before enable. Includes Drums Smash Bassdrum and Master Light / Hard Colour / Air / Smile / Warm / Wide Polish.
+
+0.1.0-rc4 corrects VU metering: sine-calibrated rectified averaging, two-pole needle inertia (approximately 300 ms to 99%), symmetric smooth return, 20 Hz visual updates and voltage-proportional scale spacing. The clearly labelled programme reference is now 0 VU = -9 dBFS RMS, to avoid pinning on louder samples. +3 VU is -6 dBFS RMS-equivalent; sustained levels above that still legitimately reach the stop. Audio processing and preset settings are unchanged.
+
+Global OUTPUT COMP is beside the stereo meters. It reuses the existing final output parameter and preserves preset/project gains; metering follows it.
