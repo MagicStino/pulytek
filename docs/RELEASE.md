@@ -23,3 +23,12 @@ The portable ZIP is for Force/MPC; the optional desktop Linux VST3 is a separate
 Global OUTPUT COMP is beside the stereo meters. It reuses the existing final output parameter and preserves preset/project gains; metering follows it.
 
 1.0.0 makes AIR enable independent of Amount at every setting, including 0%. All LED lamps toggle on touch; POWER toggles global bypass and lights when processing is active. Tube, AIR and Side lamps toggle their own sections. Existing project and preset parameter keys are unchanged.
+
+## Interface previews
+Generated native interface previews, not device captures.
+
+![Equalizer](https://raw.githubusercontent.com/MagicStino/pulytek/v1.0.0/docs/preview_0.png)
+
+![Tube and AIR](https://raw.githubusercontent.com/MagicStino/pulytek/v1.0.0/docs/preview_1.png)
+
+![Side Mixing](https://raw.githubusercontent.com/MagicStino/pulytek/v1.0.0/docs/preview_2.png)
