@@ -17,7 +17,7 @@ struct PulyTekCore {
     std::unique_ptr<EQP1A> left,right;
     Biquad side[4],air[2];
     TubeStage tubeStage[2];
-    double sampleRate=44100,dcIn[2]{},dcOut[2]{},rms[2]{};
+    double sampleRate=44100,dcIn[2]{},dcOut[2]{},vuEnvelope[2]{},vuNeedle[2]{};
     int meter[2]{},meterClock=0;
     unsigned revision=0;
     bool dirty=true;
@@ -32,12 +32,12 @@ struct PulyTekCore {
     }
     void prepare(double sr) {
         if(!std::isfinite(sr)||sr<8000||sr>192000)return;
-        sampleRate=sr;dcCoeff=std::exp(-6.283185307179586*10/sr);vuCoeff=std::exp(-1/(sr*.3));
+        sampleRate=sr;dcCoeff=std::exp(-6.283185307179586*10/sr);vuCoeff=std::exp(-1/(sr*.0452));
         left=std::make_unique<EQP1A>();right=std::make_unique<EQP1A>();left->prepare(sr);right->prepare(sr);
         for(auto& b:side)b.reset();for(auto& b:air)b.reset();
         for(auto& t:tubeStage)t.prepare(sr);
         std::fill(std::begin(dcIn),std::end(dcIn),0);std::fill(std::begin(dcOut),std::end(dcOut),0);
-        std::fill(std::begin(rms),std::end(rms),0);meter[0]=meter[1]=meterClock=0;dirty=true;apply();
+        std::fill(std::begin(vuEnvelope),std::end(vuEnvelope),0);std::fill(std::begin(vuNeedle),std::end(vuNeedle),0);meter[0]=meter[1]=meterClock=0;dirty=true;apply();
     }
     void set(int i,float v) {
         if(i<0||i>=count||!std::isfinite(v))return;
@@ -83,16 +83,23 @@ struct PulyTekCore {
         }
         for(int ch=0;ch<2;++ch){
             if(!std::isfinite(out[ch]))out[ch]=0;
-            rms[ch]=vuCoeff*rms[ch]+(1-vuCoeff)*out[ch]*out[ch];
+            // Two equal poles model needle inertia in linear rectified voltage.
+            // A step reaches 99% in ~300 ms, with the same smooth return.
+            vuEnvelope[ch]=vuCoeff*vuEnvelope[ch]+(1-vuCoeff)*std::abs(out[ch]);
+            vuNeedle[ch]=vuCoeff*vuNeedle[ch]+(1-vuCoeff)*vuEnvelope[ch];
         }
         return out;
     }
     void tick(int frames) {
         meterClock+=frames;
-        if(meterClock>=int(sampleRate/10)){
-            meterClock%=int(sampleRate/10);bool changed=false;
-            for(int ch=0;ch<2;++ch){double vu=10*std::log10(std::max(rms[ch],1e-12))+18;
-                int v=int(std::round(std::clamp((vu+20)/23,0.0,1.0)*100));changed|=v!=meter[ch];meter[ch]=v;}
+        if(meterClock>=int(sampleRate/20)){
+            meterClock%=int(sampleRate/20);bool changed=false;
+            for(int ch=0;ch<2;++ch){
+                // Sine-calibrated mean absolute voltage -> RMS equivalent.
+                // Programme reference: 0 VU = -9 dBFS RMS; +3 is full scale.
+                constexpr double rectifiedToRms=1.1107207345395915;
+                const double position=vuNeedle[ch]*rectifiedToRms/std::pow(10.,(-9.+3.)/20.);
+                int v=int(std::round(std::clamp(position,0.0,1.0)*100));changed|=v!=meter[ch];meter[ch]=v;}
             if(changed)++revision;
         }
     }
