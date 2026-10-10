@@ -25,7 +25,7 @@ not a device capture. No firmware is changed by this project.
 - **Side Mixing**: switchable M/S processing, 0–200% stereo width and −24 to +12 dB side level.
   Four peaking bands affect the **side signal only**, each with 20 Hz–20 kHz frequency, ±12 dB gain and 0.2–10 Q.
   The middle signal is preserved; 100% keeps the original width and 0% folds to mono. Side Mixing is off by default.
-- Stereo **VU meters**: approximate 300 ms RMS ballistics; **0 VU = −18 dBFS**. The needle is an engine-driven
+- Stereo **VU meters**: rectified-average moving-coil-style ballistics, approximately 300 ms to 99%; **0 VU = −9 dBFS RMS**. The needle is an engine-driven
   native filmstrip, not the unsupported native Meter component. POWER is a static illuminated panel lamp;
   Tube, AIR and Side lamps follow their switches.
 - Floating-point stereo processing preserves headroom. Full bypass returns the original audio exactly.
