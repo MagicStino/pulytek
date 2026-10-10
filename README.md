@@ -10,8 +10,8 @@ A separate project maintained by MagicStino; GPLv3 with upstream and third-party
 
 ![Generated Side Mixing preview — not a hardware capture](docs/preview_2.png)
 
-**Experimental release candidate.** Desktop DSP/host tests and ARM emulated loading with Force 3.9.1 libraries pass.
-Physical Force/MPC testing and CPU benchmarking remain pending. The previews show the generated native skin,
+**Version 1.0.0. The maintainer reports testing of the preceding version; new LED touch behavior still needs device verification.** Desktop DSP/host tests and ARM emulated loading with Force 3.9.1 libraries pass.
+Detailed device/firmware test records and CPU benchmarking are being documented. The previews show the generated native skin,
 not a device capture. No firmware is changed by this project.
 
 ## Sound and controls
