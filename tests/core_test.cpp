@@ -29,9 +29,9 @@ int main(){
     for(int choice=0;choice<6;++choice){PulyTekCore a,b;b.set(27,1);b.set(28,float(choice));assert(response(b,21000)>response(a,21000)*1.1);}
     {PulyTekCore a,b;b.set(10,1);b.set(11,0);b.apply();for(int i=0;i<8192;++i){double x=noise(rng);auto y=a.processStereo(x,x),z=b.processStereo(x,x);assert(y==z);}}
     {PulyTekCore a,b;b.set(10,1);b.set(11,100);b.apply();double delta=0;for(int i=0;i<8192;++i){double x=.6*std::sin(.1*i);auto y=a.processStereo(x,x),z=b.processStereo(x,x);delta+=std::abs(y[0]-z[0]);}assert(delta>1);}
-    {PulyTekCore a,b;b.set(27,1);b.set(32,0);b.apply();for(int i=0;i<8192;++i){double x=noise(rng);assert(a.processStereo(x,x)==b.processStereo(x,x));}}
-    {PulyTekCore a,b;b.set(27,1);b.set(31,0);assert(std::abs(response(a,16000)-response(b,16000))<1e-8);}
-    {PulyTekCore a,b,c;b.set(27,1);c.set(27,1);b.set(31,100);c.set(31,100);c.set(32,50);a.apply();b.apply();c.apply();for(int i=0;i<8192;++i){double x=noise(rng);auto dry=a.processStereo(x,x),wet=b.processStereo(x,x),mix=c.processStereo(x,x);assert(std::abs(mix[0]-(dry[0]+wet[0])*.5)<1e-10);}}
+    for(float amount:{0.f,1.f,1.999f}){PulyTekCore a,b;b.set(27,1);b.set(31,amount);assert(b.values[27]==0);b.set(27,1);assert(b.values[27]==0);b.apply();for(int i=0;i<8192;++i){double x=noise(rng);assert(a.processStereo(x,x)==b.processStereo(x,x));}}
+    {PulyTekCore a,b;b.set(31,2);b.set(27,1);assert(b.values[27]==1);assert(response(b,21000)>response(a,21000)*1.005);}
+    {PulyTekCore a,b;b.set(27,1);b.set(31,100);assert(response(b,21000)>response(a,21000)*1.8);}
     {PulyTekCore a;a.set(9,1);a.apply();auto y=a.processStereo(2.5,-1.7);assert(y[0]==2.5&&y[1]==-1.7);}
     {PulyTekCore a;a.set(9,1);a.apply();for(int i=0;i<44100*3;++i){double x=std::pow(10.,-18./20)*std::sqrt(2.)*std::sin(.1*i);a.processStereo(x,x);a.tick(1);}assert(std::abs(a.meter[0]-87)<=1);assert(a.revision>0);}
     // Extreme combinations, non-finite controls, reset and independent channels.
@@ -44,7 +44,8 @@ int main(){
     const mpc_engine_t* api=mpc_engine();void* a=api->create(nullptr);void* b=api->create(nullptr);assert(a&&b);
     for(int i=0;i<PulyTekCore::count;++i){auto [mn,mx]=PulyTekCore::range(i);char text[64];std::snprintf(text,sizeof text,"%.9g",(mn+mx)/2);api->set_param(a,PulyTekCore::keys[i],text);}
     char state[2048], restored[2048];assert(api->get_param(a,"state",state,sizeof state)>0);api->set_param(b,"state",state);api->get_param(b,"state",restored,sizeof restored);assert(!std::strcmp(state,restored));
-    {std::string old=state;old.replace(0,8,"PulyTek1");old.resize(old.rfind(' '));old.resize(old.rfind(' '));api->set_param(b,"state",old.c_str());char mix[64];api->get_param(b,"air_mix",mix,sizeof mix);assert(std::strtof(mix,nullptr)==100);api->set_param(b,"state",state);}
+    {std::string old=state;old.replace(0,8,"PulyTek1");old.resize(old.rfind(' '));api->set_param(b,"state",old.c_str());char amount[64];api->get_param(b,"air_drive",amount,sizeof amount);assert(std::strtof(amount,nullptr)==50);api->set_param(b,"state",state);}
+    {std::string old=state;old.replace(0,8,"PulyTek2");old+=" 50";api->set_param(b,"state",old.c_str());char amount[64];api->get_param(b,"air_drive",amount,sizeof amount);double expected=20*std::log10(1+.5*(std::pow(10,.15)-1))/.06;assert(std::abs(std::strtof(amount,nullptr)-expected)<1e-4);api->set_param(b,"state",state);}
     for(const char* bad:{"PulyTek1 nan","PulyTek1 0 0","bad","PulyTek1 0 0 garbage"}){api->set_param(b,"state",bad);api->get_param(b,"state",restored,sizeof restored);assert(!std::strcmp(state,restored));}
     api->destroy(a);api->destroy(b);
     PulyTekCore cpu;cpu.set(10,1);cpu.set(12,1);cpu.set(27,1);cpu.apply();auto start=std::chrono::steady_clock::now();
