@@ -11,7 +11,7 @@ Checked locally on 10 October 2026:
 - ASan/UBSan native host tests: parameters, selectors/data-wheel/Q-Links, independent instances, NULL input,
   accumulated processing, state and concurrent screen/audio access.
 - ARM ELF32 EABI hard-float, Cortex-A17, exported VSTPluginMain, maximum glibc 2.29; C++ runtime linked statically.
-- ARM QEMU smoke test against the owner's existing extracted Force 3.9.1 system libraries: dlopen, 33 parameters,
+- ARM QEMU smoke test against the owner's existing extracted Force 3.9.1 system libraries: dlopen, 35 parameters,
   48 kHz, 257-frame floating-point audio, exact bypass, combined processing, state, reset and destruction.
 - Native skin bounds, bindings, three pages and Q-Link assets; offline visual inspection. Actual touch operation
   and live meter update on hardware are not established by these tests.
