@@ -19,7 +19,7 @@ def main():
         for k in range(11):
             a=math.radians(-225+k*27); x1=cx+math.cos(a)*59;y1=cy+math.sin(a)*59;x2=cx+math.cos(a)*65;y2=cy+math.sin(a)*65
             svg.append(f'<path d="M{x1:.2f} {y1:.2f}L{x2:.2f} {y2:.2f}" stroke="#eeeeda" stroke-width="1.5"/>')
-    svg += ['<circle cx="1174" cy="546" r="20" fill="#0b1c26" stroke="#a6a698" stroke-width="3"/><circle cx="1174" cy="546" r="14" fill="url(#lamp)"/><circle cx="1169" cy="541" r="4" fill="#f2ffe7" opacity=".75"/>','</svg>']
+    svg += ['</svg>']
     (ROOT/'vst/panel.svg').write_text(''.join(svg)+'\n')
     for on in (False,True):
         lines=['<svg xmlns="http://www.w3.org/2000/svg" width="100" height="54" viewBox="0 0 100 54">',

@@ -12,4 +12,16 @@ def walk(v):
         for child in v.values():walk(child)
     elif isinstance(v,list):
         for child in v:walk(child)
+# Native generated toggles focus on tap by default. Make every switch tap-toggle.
+for definition in d['pageData']['componentDefinitions']['localComponentDefinitions']:
+    if definition['key'].startswith('shToggle'):
+        for action in definition['value']['actions']:
+            if action.get('onAction') == 'Mouse Down':
+                action['handler'] = 'Toggle Switch'
+        # POWER is the inverse of the existing bypass parameter, without a new state key.
+        if '_40x40' in definition['key']:
+            for component in definition['value']['componentsData']:
+                data = component['componentData'].get('data', {})
+                if 'onImage' in data:
+                    data['onImage'], data['offImage'] = data['offImage'], data['onImage']
 walk(d);p.write_text(json.dumps(d,indent=2)+'\n')
