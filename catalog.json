@@ -19,8 +19,25 @@
       "source_available": true,
       "distribution": "release",
       "screenshot": "https://raw.githubusercontent.com/MagicStino/pulytek/main/docs/preview_0.png",
-      "latest": "0.1.0-rc3",
+      "latest": "0.1.0-rc4",
       "versions": [
+        {
+          "version": "0.1.0-rc4",
+          "url": "https://github.com/MagicStino/pulytek/releases/download/v0.1.0-rc4/PulyTek-0.1.0-rc4-mpc-armv7.zip",
+          "sha256": "75b10fada3db834d6f9a16669dc5acb962f5b41233cb6ad4895b4f726531c5a2",
+          "size": 15636925,
+          "channel": "beta",
+          "yanked": false,
+          "cpu": "armv7",
+          "max_glibc": "2.29",
+          "os_compat": [
+            "3.x"
+          ],
+          "tested": [],
+          "warnings": [
+            "Experimental prerelease; physical Force/MPC validation pending."
+          ]
+        },
         {
           "version": "0.1.0-rc3",
           "url": "https://github.com/MagicStino/pulytek/releases/download/v0.1.0-rc3/PulyTek-0.1.0-rc3-mpc-armv7.zip",
