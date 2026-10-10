@@ -4,7 +4,10 @@ import hashlib,json,os,subprocess,tempfile,zipfile,xml.etree.ElementTree as ET
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def main():
-    archive=next((ROOT/'dist').glob('*-mpc-armv7.zip'))
+    catalog=json.loads((ROOT/'dist/openplugin.json').read_text())
+    archive=ROOT/'dist'/catalog['packages'][0]['url'].rsplit('/',1)[-1]
+    assert archive.stat().st_size==catalog['packages'][0]['size']
+    assert hashlib.sha256(archive.read_bytes()).hexdigest()==catalog['packages'][0]['sha256']
     with tempfile.TemporaryDirectory(prefix='pulytek-package-') as tmp:
         tmp=Path(tmp)
         with zipfile.ZipFile(archive) as z:

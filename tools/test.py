@@ -7,6 +7,7 @@ from patch_wrapper import patch
 ROOT=Path(__file__).resolve().parents[1]
 def run(*args):subprocess.run(list(map(str,args)),check=True)
 def main():
+    run(sys.executable,ROOT/'tools/test_presets.py')
     dep=fetch();out=ROOT/'build/tests';out.mkdir(parents=True,exist_ok=True)
     run(sys.executable,dep/'tools/gen_vst.py',ROOT/'vst/vst.json','--params-h')
     flags=['-g','-O1','-fsanitize=address,undefined','-fno-omit-frame-pointer','-I'+str(ROOT/'src'),'-I'+str(dep/'wrapper'),'-I'+str(ROOT/'vst/build')]
@@ -18,6 +19,6 @@ def main():
         run('cc',*flags,'-std=gnu11','-c',src,'-o',out/(name+'.o'))
     run('c++',*flags,out/'engine.o',out/'circuit.o',out/'wrapper.o',out/'host.o','-lpthread','-lm','-o',out/'host_test');run(out/'host_test')
     params=json.loads((ROOT/'vst/params.json').read_text())['params']
-    assert len(params)==35 and len({x['key'] for x in params})==35
+    assert len(params)==34 and len({x['key'] for x in params})==34
     manifest=json.loads((ROOT/'openplugin.json').read_text());assert manifest['repo']=='MagicStino/pulytek' and manifest['kind']=='effect'
 if __name__=='__main__':main()
