@@ -7,9 +7,12 @@ on:
   workflow_dispatch:
     inputs:
       publish:
-        description: Publish the validated experimental v0.1.0-rc1 release
+        description: Publish the validated experimental v0.1.0-rc2 release
         type: boolean
         default: false
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -49,7 +52,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create v0.1.0-rc1 dist/*.zip dist/*.sha256 dist/PulyTek-source.tar.gz dist/openplugin.json \
+          gh release create v0.1.0-rc2 dist/*.zip dist/*.sha256 dist/PulyTek-source.tar.gz dist/openplugin.json \
             --target "$GITHUB_SHA" --prerelease --title "PulyTek 0.1.0 — Force/MPC pilot" --notes-file docs/RELEASE.md
           cp dist/openplugin.json openplugin.json
           git config user.name github-actions[bot]
