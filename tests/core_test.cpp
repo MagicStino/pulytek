@@ -33,7 +33,29 @@ int main(){
     {PulyTekCore a,b;b.set(31,2);b.set(27,1);assert(b.values[27]==1);assert(response(b,21000)>response(a,21000)*1.005);}
     {PulyTekCore a,b;b.set(27,1);b.set(31,100);assert(response(b,21000)>response(a,21000)*1.8);}
     {PulyTekCore a;a.set(9,1);a.apply();auto y=a.processStereo(2.5,-1.7);assert(y[0]==2.5&&y[1]==-1.7);}
-    {PulyTekCore a;a.set(9,1);a.apply();for(int i=0;i<44100*3;++i){double x=std::pow(10.,-18./20)*std::sqrt(2.)*std::sin(.1*i);a.processStereo(x,x);a.tick(1);}assert(std::abs(a.meter[0]-87)<=1);assert(a.revision>0);}
+    // Sine calibration and smooth, sample-rate independent mechanical response.
+    for(double sr:{44100.,48000.,96000.}){
+        for(double db:{-29.,-19.,-12.,-9.,-6.}){
+            PulyTekCore a;a.prepare(sr);a.set(9,1);a.apply();
+            for(int i=0;i<int(sr);++i){double x=std::pow(10.,db/20)*std::sqrt(2.)*std::sin(6.283185307179586*1000*i/sr);a.processStereo(x,0);a.tick(1);}
+            int expected=int(std::round(std::pow(10.,(db+9.-3.)/20)*100));
+            assert(std::abs(a.meter[0]-expected)<=1);assert(a.meter[1]==0);assert(a.revision>0);
+        }
+        PulyTekCore a;a.prepare(sr);a.set(9,1);a.apply();
+        const double reference=std::pow(10.,-9./20)/1.1107207345395915;
+        auto run=[&](double seconds,double amplitude){for(int i=0;i<int(sr*seconds);++i){a.processStereo(amplitude,0);a.tick(1);}};
+        run(.05,reference);int early=a.meter[0];assert(early>0&&early<30);
+        run(.05,reference);assert(a.meter[0]>early&&a.meter[0]<55);
+        run(.2,reference);assert(std::abs(a.meter[0]-70)<=1);
+        run(.05,0);assert(a.meter[0]>40&&a.meter[0]<70);
+        run(.25,0);assert(a.meter[0]<=1);
+        // A single full-scale impulse must not fling the needle to its stop.
+        a.prepare(sr);a.processStereo(1,0);a.tick(1);run(.3,0);assert(a.meter[0]<=1);
+    }
+
+    {PulyTekCore a,b;b.set(8,-6);b.apply();
+     for(int i=0;i<44100;++i){double x=.3*std::sin(6.283185307179586*1000*i/44100);a.processStereo(x,x);b.processStereo(x,x);a.tick(1);b.tick(1);}
+     assert(std::abs(b.meter[0]-a.meter[0]*std::pow(10.,-6./20))<=1);}
     // Extreme combinations, non-finite controls, reset and independent channels.
     for(double sr:{22050.,44100.,48000.,96000.})for(int extreme=0;extreme<2;++extreme){
         PulyTekCore a;a.prepare(sr);for(int i=0;i<a.count;++i){auto [mn,mx]=a.range(i);a.set(i,extreme?mx:mn);}a.set(9,0);a.apply();
