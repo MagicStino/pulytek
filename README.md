@@ -16,12 +16,12 @@ not a device capture. No firmware is changed by this project.
 
 ## Sound and controls
 
-**EQUALIZER** is the clean Pultec front. **TUBE & AIR** holds every colour control, including both DRIVE and MIX knobs. **SIDE MIXING** holds the stereo EQ.
+**EQUALIZER** is the clean Pultec front. **TUBE & AIR** holds every colour control, including Tube DRIVE/WARMTH/MIX and AIR AMOUNT. **SIDE MIXING** holds the stereo EQ.
 
 - Original WDF low boost/attenuation and high boost/attenuation curves, with bandwidth and output trim.
 - **Tube Warmth**: two asymmetric stages with **DRIVE**, **WARMTH** and continuous **MIX** from 0–100%. This is an added colour stage,
   not a claim to reproduce a particular tube circuit. Off by default; mix defaults to 50%. [Design and measurements](docs/TUBE.md).
-- **AIR**: optional **AIR DRIVE** (0–6 dB shelf boost) and continuous **MIX** (0–100%) at **5, 8, 10, 12, 16 or 20 kHz**. Off by default; Drive defaults to 50% (+3 dB), Mix to 100%.
+- **AIR**: optional **AMOUNT** (0–100%, mapping to 0–6 dB shelf boost) at **5, 8, 10, 12, 16 or 20 kHz**. Off by default; Amount defaults to 50% (+3 dB). AIR switches off below 2%; raise Amount to at least 2% before enabling it.
 - **Side Mixing**: switchable M/S processing, 0–200% stereo width and −24 to +12 dB side level.
   Four peaking bands affect the **side signal only**, each with 20 Hz–20 kHz frequency, ±12 dB gain and 0.2–10 Q.
   The middle signal is preserved; 100% keeps the original width and 0% folds to mono. Side Mixing is off by default.
@@ -89,3 +89,5 @@ the CI desktop build is x86-64, not proof of Force VST3 support.
 
 Read [validation and remaining hardware checks](docs/VALIDATION.md), [OpenPlugin registration](docs/OPENPLUGIN.md)
 and [attribution](NOTICE.md). Other component licenses are in `licenses/`.
+
+Factory bank: **49 original presets**, with six each for Voice, Drums, Bass, Guitar, Keys, Bus, Master and Stereo, plus Init. See [preset guide](docs/PRESETS.md).
