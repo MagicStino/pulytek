@@ -15,6 +15,12 @@ static double response(PulyTekCore& c,double frequency,bool side=false){
 }
 int main(){
     std::mt19937 rng(7);std::uniform_real_distribution<double> noise(-.1,.1);
+    {PulyTekCore c;
+     for(float amount:{0.f,1.f,1.999f,2.f,100.f}){
+         c.set(31,amount);c.set(27,1);assert(c.values[27]==1);
+         c.set(31,0);assert(c.values[27]==1);
+         c.set(27,0);assert(c.values[27]==0);
+     }}
     PulyTekCore flat,eq;
     eq.set(3,7);double f=response(flat,60), boosted=response(eq,60);
     assert(boosted>f*1.4); // the real WDF low boost changes bass response
@@ -29,7 +35,7 @@ int main(){
     for(int choice=0;choice<6;++choice){PulyTekCore a,b;b.set(27,1);b.set(28,float(choice));assert(response(b,21000)>response(a,21000)*1.1);}
     {PulyTekCore a,b;b.set(10,1);b.set(11,0);b.apply();for(int i=0;i<8192;++i){double x=noise(rng);auto y=a.processStereo(x,x),z=b.processStereo(x,x);assert(y==z);}}
     {PulyTekCore a,b;b.set(10,1);b.set(11,100);b.apply();double delta=0;for(int i=0;i<8192;++i){double x=.6*std::sin(.1*i);auto y=a.processStereo(x,x),z=b.processStereo(x,x);delta+=std::abs(y[0]-z[0]);}assert(delta>1);}
-    for(float amount:{0.f,1.f,1.999f}){PulyTekCore a,b;b.set(27,1);b.set(31,amount);assert(b.values[27]==0);b.set(27,1);assert(b.values[27]==0);b.apply();for(int i=0;i<8192;++i){double x=noise(rng);assert(a.processStereo(x,x)==b.processStereo(x,x));}}
+    for(float amount:{0.f,1.f,1.999f}){PulyTekCore a,b;b.set(27,1);b.set(31,amount);assert(b.values[27]==1);if(amount>0)assert(response(b,21000)>response(a,21000));else assert(std::abs(response(b,21000)-response(a,21000))<1e-10);}
     {PulyTekCore a,b;b.set(31,2);b.set(27,1);assert(b.values[27]==1);assert(response(b,21000)>response(a,21000)*1.005);}
     {PulyTekCore a,b;b.set(27,1);b.set(31,100);assert(response(b,21000)>response(a,21000)*1.8);}
     {PulyTekCore a;a.set(9,1);a.apply();auto y=a.processStereo(2.5,-1.7);assert(y[0]==2.5&&y[1]==-1.7);}
