@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 skin=ROOT/'vst/build/skin/MagicStino - VST - PulyTek/Plugin Skins'
 t=json.loads((skin/'TUI.json').read_text())['pageData']
-assert [x['tabName'] for x in t['tabs']]==['EQUALIZER','SIDE MIXING','TUBE WARMTH']
+assert [x['tabName'] for x in t['tabs']]==['EQUALIZER','TUBE & AIR','SIDE MIXING']
 params=json.loads((ROOT/'vst/params.json').read_text())['params']
 for tab in t['tabs']:
     for c in tab['componentDefinition']['componentsData']:

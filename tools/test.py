@@ -18,6 +18,6 @@ def main():
         run('cc',*flags,'-std=gnu11','-c',src,'-o',out/(name+'.o'))
     run('c++',*flags,out/'engine.o',out/'circuit.o',out/'wrapper.o',out/'host.o','-lpthread','-lm','-o',out/'host_test');run(out/'host_test')
     params=json.loads((ROOT/'vst/params.json').read_text())['params']
-    assert len(params)==33 and len({x['key'] for x in params})==33
+    assert len(params)==35 and len({x['key'] for x in params})==35
     manifest=json.loads((ROOT/'openplugin.json').read_text());assert manifest['repo']=='MagicStino/pulytek' and manifest['kind']=='effect'
 if __name__=='__main__':main()
