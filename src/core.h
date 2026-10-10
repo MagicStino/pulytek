@@ -43,8 +43,6 @@ struct PulyTekCore {
         if(i<0||i>=count||!std::isfinite(v))return;
         auto [min,max]=range(i);v=std::clamp(v,min,max);
         if(i<=2||i==9||i==10||i==12||i==27||i==28)v=std::round(v);
-        if(i==27&&values[31]<2)v=0;
-        if(i==31&&v<2&&values[27]!=0){values[27]=0;for(auto& b:air)b.reset();}
         if(values[i]!=v){
             if(i==12)for(auto& b:side)b.reset();
             if(i==27)for(auto& b:air)b.reset();
@@ -73,7 +71,7 @@ struct PulyTekCore {
                 s*=sideGain*(values[13]*.01);out={{mid+s,mid-s}};
             }
             for(int ch=0;ch<2;++ch){
-                if(values[27]>.5f&&values[31]>=2)out[ch]=air[ch].process(out[ch]);
+                if(values[27]>.5f)out[ch]=air[ch].process(out[ch]);
                 if(values[10]>.5f){
                     double wet=tubeStage[ch].process(out[ch]);
                     out[ch]+=(wet-out[ch])*(values[11]*.01);
