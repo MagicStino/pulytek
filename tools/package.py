@@ -4,7 +4,7 @@ import argparse,gzip,hashlib,io,json,os,re,subprocess,sys,tarfile,tempfile,zipfi
 from pathlib import Path
 from fetch_deps import fetch
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='0.1.0-rc5'
+VERSION='1.0.0'
 def source_snapshot(dep,out):
     data=io.BytesIO()
     with tarfile.open(fileobj=data,mode='w') as t:
@@ -30,7 +30,7 @@ def main():
     with zipfile.ZipFile(archive) as z:files={i.filename:(z.read(i),i.external_attr) for i in z.infolist()}
     top=f'PulyTek-{a.version}/'
     # Replace upstream generic installation prose, including its unrelated hardware-tested claim.
-    install=(ROOT/'docs/INSTALL.md').read_text().replace('0.1.0-rc5',a.version)
+    install=(ROOT/'docs/INSTALL.md').read_text().replace('1.0.0',a.version)
     files[top+'INSTALL.md']=(install.encode(),(stat.S_IFREG|0o644)<<16)
     files[top+'VALIDATION.json']=((ROOT/'build/armv7/pulytek.validation.json').read_bytes(),(stat.S_IFREG|0o644)<<16)
     sums=''.join(hashlib.sha256(raw).hexdigest()+'  '+name[len(top):]+'\n' for name,(raw,_) in sorted(files.items()) if name!=top+'SHA256SUMS')
