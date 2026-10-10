@@ -1,0 +1,9 @@
+.deps/
+.venv/
+build/
+vst/build/
+dist/
+__pycache__/
+*.pyc
+
+vst/art/vu.png

@@ -1,0 +1,19 @@
+{
+  "schema": "openplugin.community/1",
+  "id": "pulytek",
+  "name": "PulyTek",
+  "author": "Alberto Barrera (ABSounds); Force/MPC port by MagicStino",
+  "repo": "MagicStino/pulytek",
+  "summary": "Pultec-style passive circuit EQ using upstream Wave Digital Filters. Experimental Force/MPC ARMv7 native effect; hardware validation pending.",
+  "kind": "effect",
+  "category": "effect",
+  "license": "GPL-3.0-only",
+  "tags": [
+    "eq",
+    "pultec",
+    "wdf",
+    "armv7"
+  ],
+  "images": [],
+  "packages": []
+}

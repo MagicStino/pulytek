@@ -1,0 +1,15 @@
+{
+  "mpc-vst-plugins": {
+    "url": "https://github.com/sd88me/mpc-vst-plugins.git",
+    "commit": "95cc428cd7d4042230cc854a780fb0b7dfa1921f"
+  },
+  "eqp-wdf-1a": {
+    "url": "https://github.com/ABSounds/EQP-WDF-1A.git",
+    "commit": "fb3d733e04fe65e73fa87843ea61fca103a0a5d7",
+    "files": [
+      "Source/EQP1A.h",
+      "Source/EQP1A.cpp",
+      "Source/chowdsp_wdf.h"
+    ]
+  }
+}
