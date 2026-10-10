@@ -21,7 +21,7 @@ not a device capture. No firmware is changed by this project.
 - Original WDF low boost/attenuation and high boost/attenuation curves, with bandwidth and output trim.
 - **Tube Warmth**: two asymmetric stages with **DRIVE**, **WARMTH** and continuous **MIX** from 0–100%. This is an added colour stage,
   not a claim to reproduce a particular tube circuit. Off by default; mix defaults to 50%. [Design and measurements](docs/TUBE.md).
-- **AIR**: optional **AMOUNT** (0–100%, mapping to 0–6 dB shelf boost) at **5, 8, 10, 12, 16 or 20 kHz**. Off by default; Amount defaults to 50% (+3 dB). AIR switches off below 2%; raise Amount to at least 2% before enabling it.
+- **AIR**: optional **AMOUNT** (0–100%, mapping to 0–6 dB shelf boost) at **5, 8, 10, 12, 16 or 20 kHz**. Off by default; Amount defaults to 50% (+3 dB). The AIR lamp switches it independently of Amount, including at 0%.
 - **Side Mixing**: switchable M/S processing, 0–200% stereo width and −24 to +12 dB side level.
   Four peaking bands affect the **side signal only**, each with 20 Hz–20 kHz frequency, ±12 dB gain and 0.2–10 Q.
   The middle signal is preserved; 100% keeps the original width and 0% folds to mono. Side Mixing is off by default.
