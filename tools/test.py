@@ -18,6 +18,8 @@ def main():
     for src,name in [(patch(dep,out/'vst2_wrap.c'),'wrapper'),(dep/'tools/host_test.c','host')]:
         run('cc',*flags,'-std=gnu11','-c',src,'-o',out/(name+'.o'))
     run('c++',*flags,out/'engine.o',out/'circuit.o',out/'wrapper.o',out/'host.o','-lpthread','-lm','-o',out/'host_test');run(out/'host_test')
+    run('cc',*flags,'-I'+str(dep/'tools'),'-std=gnu11','-c',ROOT/'tests/meter_host_test.c','-o',out/'meter_host.o')
+    run('c++',*flags,out/'engine.o',out/'circuit.o',out/'wrapper.o',out/'meter_host.o','-lpthread','-lm','-o',out/'meter_host_test');run(out/'meter_host_test')
     params=json.loads((ROOT/'vst/params.json').read_text())['params']
     assert len(params)==34 and len({x['key'] for x in params})==34
     manifest=json.loads((ROOT/'openplugin.json').read_text());assert manifest['repo']=='MagicStino/pulytek' and manifest['kind']=='effect'
