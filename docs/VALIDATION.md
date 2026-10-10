@@ -39,3 +39,5 @@ its editor is the host-style JUCE generic editor, and it has not been loaded on 
 rc3: AIR Amount below 2% turns AIR off and prevents enabling it; exact bypass tested at 0%, 1% and 1.999%. Exactly 2% remains usable, and 100% produces the expected +6 dB shelf. Native rc1/rc2 chunks migrate to the new Amount control. Legacy rc2 partial mixes preserve asymptotic shelf gain, with an approximate transition curve.
 
 Factory bank validation renders every preset at 44.1/48/96 kHz after conflicting settings, verifies all 32 recalled values, finite non-silent stereo output and peak below 1 for the specified low-level multitone. This is a deterministic headroom check, not an audition or a guarantee for arbitrary source levels.
+
+rc5 supersedes the rc3 below-2% rule: AIR remains enabled at 0–100% Amount. Low nonzero settings produce a shelf; zero is unity. Generated toggle definitions use native Mouse Down / Toggle Switch actions for touch and Enter Pressed for hardware activation. POWER uses inverted bypass images. Physical touch validation remains pending.

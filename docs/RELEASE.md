@@ -21,3 +21,5 @@ The portable ZIP is for Force/MPC; the optional desktop Linux VST3 is a separate
 0.1.0-rc4 corrects VU metering: sine-calibrated rectified averaging, two-pole needle inertia (approximately 300 ms to 99%), symmetric smooth return, 20 Hz visual updates and voltage-proportional scale spacing. The clearly labelled programme reference is now 0 VU = -9 dBFS RMS, to avoid pinning on louder samples. +3 VU is -6 dBFS RMS-equivalent; sustained levels above that still legitimately reach the stop. Audio processing and preset settings are unchanged.
 
 Global OUTPUT COMP is beside the stereo meters. It reuses the existing final output parameter and preserves preset/project gains; metering follows it.
+
+0.1.0-rc5 makes AIR enable independent of Amount at every setting, including 0%. All LED lamps toggle on touch; POWER toggles global bypass and lights when processing is active. Tube, AIR and Side lamps toggle their own sections. Existing project and preset parameter keys are unchanged.
