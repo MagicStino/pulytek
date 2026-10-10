@@ -8,6 +8,8 @@ A separate project maintained by MagicStino; GPLv3 with upstream and third-party
 
 ![Generated Side Mixing preview — not a hardware capture](docs/preview_1.png)
 
+![Generated Tube Warmth preview — not a hardware capture](docs/preview_2.png)
+
 **Experimental release candidate.** Desktop DSP/host tests and ARM emulated loading with Force 3.9.1 libraries pass.
 Physical Force/MPC testing and CPU benchmarking remain pending. The previews show the generated native skin,
 not a device capture. No firmware is changed by this project.
@@ -25,7 +27,7 @@ not a device capture. No firmware is changed by this project.
   native filmstrip, not the unsupported native Meter component. POWER is a static illuminated panel lamp;
   Tube, AIR and Side lamps follow their switches.
 - Floating-point stereo processing preserves headroom. Full bypass returns the original audio exactly.
-- Both pages have native touch controls and Q-Link banks. Dexed was inspected as a working format example;
+- All three pages have native touch controls and Q-Link banks. Dexed was inspected as a working format example;
   PulyTek's panel art is original and uses blue, cream lettering, ribbed switches and Bakelite-style knobs.
 
 Signal order: passive WDF EQ → optional side matrix/EQ/width → AIR → tube colour/mix → output trim.
@@ -56,7 +58,7 @@ python tools/package.py
 python tools/test_package.py
 ```
 
-Outputs: `build/armv7/pulytek.so`, ELF validation, both generated TUI pages and Q-Link maps, `docs/preview_*.png`,
+Outputs: `build/armv7/pulytek.so`, ELF validation, three generated TUI pages and Q-Link maps, `docs/preview_*.png`,
 portable ZIP, checksum, full source snapshot and `dist/openplugin.json`. The root community manifest is updated
 only after a package is actually published. Dependency commits, Python tools, Zig 0.15.2 and ZIP timestamps are pinned.
 A complete corresponding source snapshot (including the pinned wrapper/tooling and licenses) ships in the package.

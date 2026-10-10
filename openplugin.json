@@ -14,6 +14,23 @@
     "wdf",
     "armv7"
   ],
-  "images": [],
-  "packages": []
+  "images": [
+    "https://raw.githubusercontent.com/MagicStino/pulytek/main/docs/preview_0.png",
+    "https://raw.githubusercontent.com/MagicStino/pulytek/main/docs/preview_1.png",
+    "https://raw.githubusercontent.com/MagicStino/pulytek/main/docs/preview_2.png"
+  ],
+  "packages": [
+    {
+      "version": "0.1.0-rc1",
+      "arch": "armv7",
+      "layout": "portable",
+      "devices": [
+        "force",
+        "mpc-gen1"
+      ],
+      "size": 16727368,
+      "sha256": "c32fcff70def42400c2dec00b9e95d540c6b2149d0f777e4cb39aa36680c40a8",
+      "url": "https://github.com/MagicStino/pulytek/releases/download/v0.1.0-rc1/PulyTek-0.1.0-rc1-mpc-armv7.zip"
+    }
+  ]
 }
