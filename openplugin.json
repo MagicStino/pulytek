@@ -21,6 +21,18 @@
   ],
   "packages": [
     {
+      "version": "0.1.0-rc2",
+      "arch": "armv7",
+      "layout": "portable",
+      "devices": [
+        "force",
+        "mpc-gen1"
+      ],
+      "size": 15748882,
+      "sha256": "10c3edf04b61e4f56c2d1ef82655b492c79e042f8f7bcbc2d5c4e411a4ac5b81",
+      "url": "https://github.com/MagicStino/pulytek/releases/download/v0.1.0-rc2/PulyTek-0.1.0-rc2-mpc-armv7.zip"
+    },
+    {
       "version": "0.1.0-rc1",
       "arch": "armv7",
       "layout": "portable",
