@@ -6,9 +6,9 @@ A separate project maintained by MagicStino; GPLv3 with upstream and third-party
 
 ![Generated native panel preview — not a hardware capture](docs/preview_0.png)
 
-![Generated Side Mixing preview — not a hardware capture](docs/preview_1.png)
+![Generated Tube & AIR preview — not a hardware capture](docs/preview_1.png)
 
-![Generated Tube Warmth preview — not a hardware capture](docs/preview_2.png)
+![Generated Side Mixing preview — not a hardware capture](docs/preview_2.png)
 
 **Experimental release candidate.** Desktop DSP/host tests and ARM emulated loading with Force 3.9.1 libraries pass.
 Physical Force/MPC testing and CPU benchmarking remain pending. The previews show the generated native skin,
@@ -16,10 +16,12 @@ not a device capture. No firmware is changed by this project.
 
 ## Sound and controls
 
+**EQUALIZER** is the clean Pultec front. **TUBE & AIR** holds every colour control, including both DRIVE and MIX knobs. **SIDE MIXING** holds the stereo EQ.
+
 - Original WDF low boost/attenuation and high boost/attenuation curves, with bandwidth and output trim.
 - **Tube Warmth**: two asymmetric stages with **DRIVE**, **WARMTH** and continuous **MIX** from 0–100%. This is an added colour stage,
   not a claim to reproduce a particular tube circuit. Off by default; mix defaults to 50%. [Design and measurements](docs/TUBE.md).
-- **AIR**: optional +3 dB high shelf at **5, 8, 10, 12, 16 or 20 kHz**. Off by default.
+- **AIR**: optional **AIR DRIVE** (0–6 dB shelf boost) and continuous **MIX** (0–100%) at **5, 8, 10, 12, 16 or 20 kHz**. Off by default; Drive defaults to 50% (+3 dB), Mix to 100%.
 - **Side Mixing**: switchable M/S processing, 0–200% stereo width and −24 to +12 dB side level.
   Four peaking bands affect the **side signal only**, each with 20 Hz–20 kHz frequency, ±12 dB gain and 0.2–10 Q.
   The middle signal is preserved; 100% keeps the original width and 0% folds to mono. Side Mixing is off by default.
