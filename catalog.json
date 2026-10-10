@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "plugins": [
+    {
+      "id": "pulytek",
+      "name": "PulyTek",
+      "author": "Alberto Barrera (ABSounds); Force/MPC port by MagicStino",
+      "repo": "MagicStino/pulytek",
+      "kind": "effect",
+      "license": "GPL-3.0-only",
+      "summary": "Pultec-style passive circuit EQ using upstream Wave Digital Filters. Experimental Force/MPC ARMv7 native effect; hardware validation pending.",
+      "tags": [
+        "eq",
+        "pultec",
+        "wdf",
+        "armv7"
+      ],
+      "style": "effect",
+      "source_available": true,
+      "distribution": "release",
+      "screenshot": "https://raw.githubusercontent.com/MagicStino/pulytek/main/docs/preview_0.png",
+      "latest": "0.1.0-rc3",
+      "versions": [
+        {
+          "version": "0.1.0-rc3",
+          "url": "https://github.com/MagicStino/pulytek/releases/download/v0.1.0-rc3/PulyTek-0.1.0-rc3-mpc-armv7.zip",
+          "sha256": "b8f1b7f8699c58416b635df3bdc57d54eb5e0a9d9cbbe54f958b818840e21415",
+          "size": 17165088,
+          "channel": "beta",
+          "yanked": false,
+          "cpu": "armv7",
+          "max_glibc": "2.29",
+          "os_compat": [
+            "3.x"
+          ],
+          "tested": [],
+          "warnings": [
+            "Experimental prerelease: physical Force/MPC validation pending."
+          ]
+        }
+      ]
+    }
+  ]
+}
