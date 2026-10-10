@@ -21,52 +21,16 @@
   ],
   "packages": [
     {
-      "version": "0.1.0-rc4",
+      "version": "1.0.0",
       "arch": "armv7",
       "layout": "portable",
       "devices": [
         "force",
         "mpc-gen1"
       ],
-      "size": 15636925,
-      "sha256": "75b10fada3db834d6f9a16669dc5acb962f5b41233cb6ad4895b4f726531c5a2",
-      "url": "https://github.com/MagicStino/pulytek/releases/download/v0.1.0-rc4/PulyTek-0.1.0-rc4-mpc-armv7.zip"
-    },
-    {
-      "version": "0.1.0-rc3",
-      "arch": "armv7",
-      "layout": "portable",
-      "devices": [
-        "force",
-        "mpc-gen1"
-      ],
-      "size": 17165088,
-      "sha256": "b8f1b7f8699c58416b635df3bdc57d54eb5e0a9d9cbbe54f958b818840e21415",
-      "url": "https://github.com/MagicStino/pulytek/releases/download/v0.1.0-rc3/PulyTek-0.1.0-rc3-mpc-armv7.zip"
-    },
-    {
-      "version": "0.1.0-rc2",
-      "arch": "armv7",
-      "layout": "portable",
-      "devices": [
-        "force",
-        "mpc-gen1"
-      ],
-      "size": 15748882,
-      "sha256": "10c3edf04b61e4f56c2d1ef82655b492c79e042f8f7bcbc2d5c4e411a4ac5b81",
-      "url": "https://github.com/MagicStino/pulytek/releases/download/v0.1.0-rc2/PulyTek-0.1.0-rc2-mpc-armv7.zip"
-    },
-    {
-      "version": "0.1.0-rc1",
-      "arch": "armv7",
-      "layout": "portable",
-      "devices": [
-        "force",
-        "mpc-gen1"
-      ],
-      "size": 16727368,
-      "sha256": "c32fcff70def42400c2dec00b9e95d540c6b2149d0f777e4cb39aa36680c40a8",
-      "url": "https://github.com/MagicStino/pulytek/releases/download/v0.1.0-rc1/PulyTek-0.1.0-rc1-mpc-armv7.zip"
+      "size": 15637851,
+      "sha256": "0764c1ff574f4703b594db6b743eec3a1732ae76a1113124de36a307aae2660b",
+      "url": "https://github.com/MagicStino/pulytek/releases/download/v1.0.0/PulyTek-1.0.0-mpc-armv7.zip"
     }
   ]
 }
