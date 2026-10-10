@@ -13,9 +13,13 @@ static void midi(void*,const uint8_t*,int){}
 static void set(void* p,const char* key,const char* value){
     auto& s=*static_cast<PulyTekCore*>(p);
     if(!std::strcmp(key,"state")){
-        if(std::strncmp(value,"PulyTek1 ",9))return;
-        std::array<float,PulyTekCore::count> vals{};const char* at=value+9;
-        for(auto& v:vals){char* end=nullptr;errno=0;v=std::strtof(at,&end);if(end==at||errno==ERANGE||!std::isfinite(v))return;at=end;}
+        bool legacy=!std::strncmp(value,"PulyTek1 ",9);
+        if(!legacy&&std::strncmp(value,"PulyTek2 ",9))return;
+        auto vals=s.values;vals[31]=50;vals[32]=100;const char* at=value+9;
+        for(int i=0;i<s.count;++i){
+            if(legacy&&i==31&&!*at)break;
+            char* end=nullptr;errno=0;vals[i]=std::strtof(at,&end);if(end==at||errno==ERANGE||!std::isfinite(vals[i]))return;at=end;
+        }
         if(*at!=0)return;
         for(int i=0;i<s.count;++i)s.set(i,vals[i]);return;
     }
@@ -27,7 +31,7 @@ static void set(void* p,const char* key,const char* value){
 static int get(void* p,const char* key,char* b,int len){
     auto& s=*static_cast<PulyTekCore*>(p);
     if(!std::strcmp(key,"state")){
-        int at=std::snprintf(b,len,"PulyTek1");
+        int at=std::snprintf(b,len,"PulyTek2");
         for(auto v:s.values){if(at<0||at>=len)return 0;at+=std::snprintf(b+at,len-at," %.9g",v);}return at<len?at:0;
     }
     if(!std::strcmp(key,"display_rev"))return std::snprintf(b,len,"%u",s.revision);

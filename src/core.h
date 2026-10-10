@@ -8,12 +8,12 @@
 #include <algorithm>
 
 struct PulyTekCore {
-    static constexpr int count=31;
+    static constexpr int count=33;
     // Saved state keys are stable. VST parameter order is vst/params.json.
     static constexpr const char* keys[count]={
       "lo_freq","hi_freq","cut_freq","lo_boost","lo_cut","hi_boost","bandwidth","hi_cut","output","bypass","tube","tube_mix",
-      "side_on","width","side_gain","s1_freq","s1_gain","s1_q","s2_freq","s2_gain","s2_q","s3_freq","s3_gain","s3_q","s4_freq","s4_gain","s4_q","air","air_freq","tube_drive","tube_warmth"};
-    std::array<float,count> values {{0,3,2,0,0,0,5,0,0,0,0,50,0,100,0,150,0,.707f,800,0,.707f,3000,0,.707f,10000,0,.707f,0,3,25,50}};
+      "side_on","width","side_gain","s1_freq","s1_gain","s1_q","s2_freq","s2_gain","s2_q","s3_freq","s3_gain","s3_q","s4_freq","s4_gain","s4_q","air","air_freq","tube_drive","tube_warmth","air_drive","air_mix"};
+    std::array<float,count> values {{0,3,2,0,0,0,5,0,0,0,0,50,0,100,0,150,0,.707f,800,0,.707f,3000,0,.707f,10000,0,.707f,0,3,25,50,50,100}};
     std::unique_ptr<EQP1A> left,right;
     Biquad side[4],air[2];
     TubeStage tubeStage[2];
@@ -26,7 +26,7 @@ struct PulyTekCore {
     static std::pair<float,float> range(int i) {
         if(i==0)return {0,3};if(i==1)return {0,6};if(i==2)return {0,2};
         if(i==8)return {-20,20};if(i==9||i==10||i==12||i==27)return {0,1};
-        if(i==11||i==29||i==30)return {0,100};if(i==13)return {0,200};if(i==14)return {-24,12};if(i==28)return {0,5};
+        if(i==11||i==29||i==30||i==31||i==32)return {0,100};if(i==13)return {0,200};if(i==14)return {-24,12};if(i==28)return {0,5};
         if(i>=15 && i<=26){if((i-15)%3==0)return {20,20000};if((i-15)%3==1)return {-12,12};return {.2f,10};}
         return {0,10};
     }
@@ -57,7 +57,7 @@ struct PulyTekCore {
         gain=std::pow(10,double(values[8])/20);sideGain=std::pow(10,double(values[14])/20);
         for(int i=0;i<4;++i)side[i].peak(sampleRate,values[15+i*3],values[16+i*3],values[17+i*3]);
         constexpr double frequencies[]={5000,8000,10000,12000,16000,20000};
-        for(auto& b:air)b.shelf(sampleRate,frequencies[int(values[28])],3.0);
+        for(auto& b:air)b.shelf(sampleRate,frequencies[int(values[28])],values[31]*.06);
         for(auto& t:tubeStage)t.configure(sampleRate,values[29],values[30]);
         dirty=false;
     }
@@ -71,7 +71,7 @@ struct PulyTekCore {
                 s*=sideGain*(values[13]*.01);out={{mid+s,mid-s}};
             }
             for(int ch=0;ch<2;++ch){
-                if(values[27]>.5f)out[ch]=air[ch].process(out[ch]);
+                if(values[27]>.5f){double wet=air[ch].process(out[ch]);out[ch]+=(wet-out[ch])*(values[32]*.01);}
                 if(values[10]>.5f){
                     double wet=tubeStage[ch].process(out[ch]);
                     out[ch]+=(wet-out[ch])*(values[11]*.01);
