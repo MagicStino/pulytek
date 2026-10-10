@@ -13,8 +13,8 @@ def main():
     for x in (30,1250):
         for y in (26,596): svg.append(f'<circle cx="{x}" cy="{y}" r="8" fill="#9aa3a5" stroke="#152e40" stroke-width="3"/><path d="M{x-4} {y-4}l8 8" stroke="#37464e" stroke-width="2"/>')
     (ROOT/'vst/panel_side.svg').write_text(''.join(svg)+ '</svg>\n')
-    for x in (450,854): svg.append(f'<path d="M{x} 222v234" stroke="#adc0c6" opacity=".45"/>')
-    for cx in (140,338,562,752,954,1144):
+    for x in (470,1000): svg.append(f'<path d="M{x} 222v160" stroke="#adc0c6" opacity=".45"/>')
+    for cx in (140,385,630,875,1120):
         cy=372-84
         for k in range(11):
             a=math.radians(-225+k*27); x1=cx+math.cos(a)*59;y1=cy+math.sin(a)*59;x2=cx+math.cos(a)*65;y2=cy+math.sin(a)*65
@@ -42,14 +42,14 @@ def main():
         def box(coords,fill,outline=None,width=1): d.rounded_rectangle(tuple(v*scale for v in coords),radius=8*scale,fill=fill,outline=outline,width=width*scale)
         box((4,4,w-4,h-4),'#4a4e4b','#a4a294',2);box((11,11,w-11,h-11),'#efe0ab','#0d1519',3)
         cx,cy=126,140
-        # Scale matches the DSP mapping: -20..+3 VU; 0 VU = -18 dBFS.
+        # Scale matches the DSP mapping: -20..+3 VU; 0 VU = -9 dBFS RMS.
         def pt(angle,r): a=math.radians(angle);return ((cx+math.cos(a)*r)*scale,(cy+math.sin(a)*r)*scale)
         for vu in range(-20,4):
-            angle=-150+(vu+20)/23*120;col='#8c251b' if vu>=0 else '#292a22'
+            angle=-150+math.pow(10,(vu-3)/20)*120;col='#8c251b' if vu>=0 else '#292a22'
             d.line([pt(angle,91),pt(angle,100 if vu in (-20,-10,-7,-5,-3,0,1,2,3) else 95)],fill=col,width=scale)
             if vu in (-20,-10,-7,-5,-3,0,1,2,3):
                 x,y=pt(angle,113);d.text((x,y),str(vu),font=small,fill=col,anchor='mm')
-        d.text((126*scale,76*scale),'VU',font=title,fill='#292a22',anchor='mm');d.text((126*scale,100*scale),'0 VU = -18 dBFS',font=small,fill='#594d37',anchor='mm')
+        d.text((126*scale,76*scale),'VU',font=title,fill='#292a22',anchor='mm');d.text((126*scale,100*scale),'0 VU = -9 dBFS RMS',font=small,fill='#594d37',anchor='mm')
         angle=-150+frame*1.2;d.line([(cx*scale,cy*scale),pt(angle,96)],fill='#702417',width=2*scale)
         d.ellipse(((cx-7)*scale,(cy-7)*scale,(cx+7)*scale,(cy+7)*scale),fill='#242726',outline='#7b796b',width=scale)
         im=im.resize((w,h),Image.Resampling.LANCZOS);strip.paste(im,(0,frame*h))
