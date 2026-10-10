@@ -73,7 +73,7 @@
     },
     {
       "key": "output",
-      "name": "Output",
+      "name": "Output compensation",
       "min": -20,
       "max": 20,
       "default": 0,
